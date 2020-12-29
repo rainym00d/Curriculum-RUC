@@ -1,0 +1,194 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{dirtree}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{amsmath,amsthm,mathtools,amsfonts}
+\usepackage{diagbox}
+\usepackage{multirow,makecell}
+\usepackage{float}
+\usepackage{url}
+\usepackage[nottoc]{tocbibind}
+\usepackage{float}
+\usepackage[colorlinks=true, linkcolor=black]{hyperref}
+\usepackage{booktabs}
+
+%----------
+% 定义代码样式
+%----------
+
+\lstset{
+ columns=fixed,
+ numbers=left,                                        % 在左侧显示行号
+ numberstyle=\tiny\color{gray},                       % 设定行号格式
+ basicstyle=\small\ttfamily,
+ frame=none,                                          % 不显示背景边框
+ backgroundcolor=\color[RGB]{245,245,244},            % 设定背景颜色
+ keywordstyle=\color[RGB]{40,40,255},                 % 设定关键字颜色
+ numberstyle=\footnotesize\color{darkgray},           
+ commentstyle=\color{gray}\ttfamily,                  % 设置代码注释的格式
+ stringstyle=\rmfamily\slshape\color[RGB]{128,0,0},   % 设置字符串格式
+ showstringspaces=false,
+ breaklines=true,
+ language=c++
+}
+
+% 页边距
+\usepackage[a4paper]{geometry}
+\geometry{verbose,
+  tmargin=2cm,% 上边距
+  bmargin=2cm,% 下边距
+  lmargin=3cm,% 左边距
+  rmargin=3cm % 右边距
+}
+
+%----------
+% 设置页眉页脚
+%----------
+
+\usepackage{fancyhdr}	%使用fancyhdr宏包
+\pagestyle{fancy}		%使用fancy页面风格
+% \lhead{左边页眉}		 %设置页眉左侧
+% \chead{中间页眉}			%设置页眉中间
+% \rhead{\leftmark}			%设置页眉右侧为leftmark
+% \lfoot{\rightmark}			%设置页脚左侧为rightmark
+\cfoot{\thepage}			%设置页脚中间为页码
+% \rfoot{右边页脚}			%设置页脚右侧为"右边页脚
+\fancyhead[C]{数据结构与算法}
+\fancyhead[R]{}
+\fancyhead[L]{}
+\renewcommand{\headrulewidth}{2pt}
+
+\newcommand{\refe}[1]{Eq.\ref{#1}}
+\newcommand{\reft}[1]{Theory.\ref{#1}\ }
+\newcommand{\refl}[1]{Lemma.\ref{#1}\ }
+\newcommand{\reff}[1]{图\ref{#1}\ }
+\newtheorem{example}{例}
+\newtheorem{definition}{定义}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}{引理}
+\geometry{bottom=2cm,left=1cm,right=1cm}
+\pagestyle{plain}
+
+\title{DSA\_14}
+\author{邵宁录\space\space\space\space2018202195}
+\begin{document}
+    \maketitle
+    \tableofcontents
+    \clearpage
+    \section{25.2-4}
+    不妨以$d_{ij}$为例。
+
+    \begin{enumerate}
+      \item 若$\min(d_{ij}, d_{ik}+d_{kj})=d_{ij}$，则显然，$d_{ij}=d_{ij}$。
+      这与之前的算法一样，没有任何变化。
+      \item 若$\min(d_{ij}, d_{ik}+d_{kj})=d_{ik}+d_{kj}$，那么$d_{ik}$与$d_{kj}$可能经历了$k-1$次或$k$次松弛操作。
+      但不管经历了几次，$d_{ij}$是中间结点取自${1,2,3,\ldots,k}$的一条最短路径，这是一个循环不变量。
+      则当$k=n$时，全部的$d_{ij}$均得到了包含所有结点的最短路径。
+    \end{enumerate}
+    \section{25.3-1}
+    \begin{table}[H]
+      \centering
+      \begin{tabular}{c|c}
+          \toprule
+          $v$& $h$\\
+          \hline
+          1& -5\\
+          2& -3\\
+          3& 0\\
+          4& -1\\
+          5& -6\\
+          6& -8\\
+          \bottomrule
+      \end{tabular}
+      \caption{h的值}
+    \end{table}
+    \begin{table}[H]
+      \centering
+      \begin{tabular}{ccc|ccc}
+          \toprule
+          $u$& $v$& $\hat{w}$& $u$& $v$& $\hat{w}$\\
+          \hline
+          1& 2& $NIL$& 4& 1& 0\\
+          1& 3& $NIL$& 4& 2& $NIL$\\
+          1& 4& $NIL$& 4& 3& $NIL$\\
+          1& 5& 0& 4& 5& 8\\
+          1& 6& $NIL$& 4& 6& $NIL$\\
+          2& 1& 3& 5& 1& $NIL$\\
+          2& 3& $NIL$& 5& 2& 4\\
+          2& 4& 0& 5& 3& $NIL$\\
+          2& 5& $NIL$& 5& 4& $NIL$\\
+          2& 6& $NIL$& 5& 6& $NIL$\\
+          3& 1& $NIL$& 6& 1& $NIL$\\
+          3& 2& 5& 6& 2& 0\\
+          3& 4& $NIL$& 6& 3& 2\\
+          3& 5& $NIL$& 6& 4& $NIL$\\
+          3& 6& 0& 6& 5& $NIL$\\
+          \bottomrule
+      \end{tabular}
+      \caption{$\hat{w}$的值}
+    \end{table}
+    最短路径结果如下：
+    \begin{equation*}
+      \left[
+      \begin{matrix}
+        0& 6& \infty& 8& -1& \infty\\
+        -2& 0& \infty& 2& -3& \infty\\
+        -5& -3& 0& -1& -6& -8\\
+        -4& 2& \infty& 0& -5& \infty\\
+        5& 7& \infty& 9& 0& \infty\\
+        3& 5& 10& 7& 2& 0
+      \end{matrix}
+      \right]
+    \end{equation*}
+    \section{26-3}
+    \subsection{a}
+    由题意得，对于每个结点$A_k\in R_i$，则图$G$包含边$(A_k,J_i)$，其容量为边$c(A_k,J_i)=\infty$。
+
+    由于分割$(S,T)$的容量是有限的，根据分割的容量定义：
+    $$c(S,T)=\sum_{u\in S}\sum_{v\in T}c(u,v)$$
+
+    若对于每个结点$A_K\in R_i$，有$A_k\notin T$，则有$A_k\in S$。
+
+    则显然会有$S$到$T$的流$c(A_k,J_i)$存在，而$c(A_k,J_i)=\infty$，这与切割$(S,T)$容量有限矛盾。
+
+    因此假设不成立，即对于每个结点$A_K\in R_i$，有$A_k\in T$。
+    \subsection{b}
+    最大净收入相当于所有接受的工作的营收减去所有聘请的专家的费用。
+    设所有接受的工作的集合为$J_{yes}$，所有拒绝的工作的集合为$J_{no}$。
+    所有聘请的专家的子领域集合为$A_{yes}$，所有没聘请的为$A_{no}$。
+
+    有净收入如下式：
+    $$Profit=\sum_{J_{yes}} p_i-\sum_{A_{yes}} c_i$$
+
+    而$\sum_{J_{yes}} p_i=\sum_{J}p_i-\sum_{J_{no}}p_i$，则有$Profit=\sum_{J}p_i-(\sum_{J_{no}}p_i+\sum_{A_{yes}} c_i)$。
+    
+    下面说明$\sum_{J_{no}}p_i+\sum_{A_{yes}} c_i$为有限切割$(S,T)$的容量。
+
+    不妨构造这样的一个切割。其中$A_{yes}$都在$T$中，$A_{no}$都在$S$中，$J_{yes}$都在$T$中，$J_{no}$都在$S$中。
+
+    由于$(S,T)$是有限的，所以没有穿过$S$和$T$的边$(A_k,J_i)$。那么有：
+    $$c(S,T)=\sum_{A_i\in A_{yes}}c(s,A_i)+\sum_{J_i\in J_{no}}c(J_i,t)$$
+
+    而根据题意，上式可以写成：
+    $$c(S,T)=\sum_{J_{no}}p_i+\sum_{A_{yes}} c_i$$
+
+    所以，$\sum_{J_{no}}p_i+\sum_{A_{yes}} c_i$为有限切割$(S,T)$的容量。
+
+    而$Profit$最大，即$\sum_{J_{no}}p_i+\sum_{A_{yes}} c_i$最小。
+    因此根据最大流最小切割定理，用$S$到$T$的最大流算法就能求解这个问题。用全部工作的营收减去最小切割容量，就得到了最大利润。
+    \subsection{c}
+    算法步骤：
+    \begin{enumerate}
+      \item 根据题意构建一个流网络$G$。
+      \item 运用最大流最小切割算法获得一个最小切割$(S,T)$。
+      \item 根据最小切割的结果来判断哪些工作该接受（接受在$T$中的工作）。
+    \end{enumerate}
+
+    总共的节点数为$|V|=m+n+2$，边数为$|E|=r+m+n$。
+    
+    构造流网络所花的时间为线性$O(|E|)$。获得最小切割，如果用$Edmonds-Karp$算法的话，时间复杂度为$O(|V||E|^2)$。
+
+    所以总的时间复杂度为算法的话，时间复杂度为$O(|V||E|^2)$。
+\end{document}

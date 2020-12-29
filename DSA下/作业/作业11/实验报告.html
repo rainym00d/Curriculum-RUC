@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>&#x5B9E;&#x9A8C;11 &#x6590;&#x6CE2;&#x62C9;&#x5951;&#x5806;</title>
+        <style>
+</style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="实验11-斐波拉契堆">实验11 斐波拉契堆</h1>
+<center>姓名：邵宁录&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp学号：2018202195</center>
+<h2 id="目录">目录</h2>
+<ol>
+<li><a href="#%E4%B8%80%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0">问题描述</a></li>
+<li><a href="#%E4%BA%8C%E7%AE%97%E6%B3%95%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF">算法基本思路</a></li>
+<li><a href="#%E4%B8%89%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90">算法复杂度分析</a></li>
+<li><a href="#%E5%9B%9B%E6%BA%90%E7%A0%81">源码</a></li>
+<li><a href="#%E4%BA%94%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C%E6%88%AA%E5%9B%BE">运行结果截图</a></li>
+<li><a href="#%E5%85%AD%E9%97%AE%E9%A2%98%E4%B8%8E%E6%80%BB%E7%BB%93">问题与总结</a></li>
+</ol>
+<h2 id="一问题描述">一、问题描述</h2>
+<p>实现斐波拉契堆，至少包括插入，合并，抽取最小点操作。</p>
+<h2 id="二算法基本思路">二、算法基本思路</h2>
+<p>算法基本思路基本参考算法导论第19章的内容，在细节上略有修改。</p>
+<h3 id="插入">插入</h3>
+<p>插入操作主要分为以下几个步骤：</p>
+<ol>
+<li>根据传入的值 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 新建一个结点。</li>
+<li>若堆原本为空，则将 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">Min</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span></span></span></span> 指向它即可。</li>
+<li>若堆原本不为空：
+<ol>
+<li>先将该结点插入 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">Min</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span></span></span></span> 结点的左边</li>
+<li>再比较新结点与 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">Min</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span></span></span></span> 结点的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>e</mi><mi>y</mi></mrow><annotation encoding="application/x-tex">key</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span> 的大小，若新结点比较小，则将 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">Min</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span></span></span></span> 指向新结点。</li>
+</ol>
+</li>
+<li>堆的结点数量 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">+</span><span class="mord">1</span></span></span></span></li>
+</ol>
+<h3 id="合并">合并</h3>
+<p>合并操作主要分为以下几个情况：</p>
+<ol>
+<li>若两个堆都是空的，则合并后仍然是个空堆。</li>
+<li>若只有 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span> 是空堆，则合并后直接变为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span></span> 。</li>
+<li>若只有 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span></span> 是空堆，则合并后直接变为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span> 。</li>
+<li>若都不为空：
+<ol>
+<li>先将当前的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">Min</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span></span></span></span> 指向 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span> 的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">Min</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span></span></span></span> 。</li>
+<li>然后将 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span></span> 的根结点全部加入 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span> 的左端。</li>
+<li>最后比较 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo separator="true">,</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A,B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span></span> 的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>e</mi><mi>y</mi></mrow><annotation encoding="application/x-tex">key</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span> 的大小，若 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span></span> 的更小，则将 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">Min</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span></span></span></span> 指向 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span></span> 。</li>
+</ol>
+</li>
+<li>最后将当前结点数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 更新一下。</li>
+</ol>
+<h3 id="抽取最小点">抽取最小点</h3>
+<p>抽取最小点主要分为以下几个情况：</p>
+<ol>
+<li>若堆为空，则返回 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>u</mi><mi>l</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">null</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">n</span><span class="mord mathdefault">u</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span> 。</li>
+<li>若堆内只有一个结点。则就返回当前结点，并删除它。</li>
+<li>其他情况时，先将 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">Min</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span></span></span></span> 的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mi>h</mi><mi>i</mi><mi>l</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">child</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">h</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">d</span></span></span></span> 加入根链表，然后将其 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">Min</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span></span></span></span> 指向当前右边的结点。最后 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>o</mi><mi>n</mi><mi>s</mi><mi>o</mi><mi>l</mi><mi>i</mi><mi>d</mi><mi>a</mi><mi>t</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">Consolidate</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span><span class="mord mathdefault">a</span><span class="mord mathdefault">t</span><span class="mord mathdefault">e</span></span></span></span> 。</li>
+</ol>
+<h2 id="三算法复杂度分析">三、算法复杂度分析</h2>
+<p>使用摊还分析中的势能法分析其复杂度：首先定义整个斐波那契堆的势能函数为: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Φ</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo><mo>=</mo><mi>t</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo><mo>+</mo><mn>2</mn><mi>m</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Phi(H) = t(H) + 2m(H)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Φ</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span></span></span></span> 。</p>
+<p>其中 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">t(H)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span></span></span></span> 为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span></span></span></span> 中根链表中的节点数， <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">m(H)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span></span></span></span> 为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span></span></span></span> 中已标记节点的和。</p>
+<p>在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>H</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">|H|=0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 时， <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Φ</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\Phi(H) = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Φ</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>，同时在<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>H</mi><mi mathvariant="normal">∣</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">|H|&gt;0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>时恒有<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Φ</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\Phi(H) &gt; 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Φ</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>， 因此摊还代价 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><mover accent="true"><msub><mi>c</mi><mi>i</mi></msub><mo>^</mo></mover><mo>=</mo><mo>∑</mo><mo stretchy="false">(</mo><msub><mi>c</mi><mi>i</mi></msub><mo>+</mo><mi mathvariant="normal">Φ</mi><mo stretchy="false">(</mo><msub><mi>H</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mo>−</mo><mi mathvariant="normal">Φ</mi><mo stretchy="false">(</mo><msub><mi>H</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\sum\hat{c_i} = \sum(c_i + \Phi(H_i) - \Phi(H_{i-1}))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.25em;"><span class="mord">^</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Φ</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.08125em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Φ</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.08125em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mclose">)</span></span></span></span> 永远是实际代价的的上界。</p>
+<p>接下来分析每一个操作的摊还代价:</p>
+<ol>
+<li>插入操作<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>t</mi><mo stretchy="false">(</mo><msup><mi>H</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mi>t</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo><mo>+</mo><mn>1</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>m</mi><mo stretchy="false">(</mo><msup><mi>H</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mi>m</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi mathvariant="normal">Δ</mi><mi mathvariant="normal">Φ</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">(</mo><msup><mi>H</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">)</mo><mo>+</mo><mn>2</mn><mi>m</mi><mo stretchy="false">(</mo><msup><mi>H</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>−</mo><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo><mo>+</mo><mn>2</mn><mi>m</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+   t(H&#x27;) &amp;= t(H) + 1\\
+         m(H&#x27;) &amp;= m(H)\\
+         \Delta\Phi(H) &amp;= (t(H&#x27;)+2m(H&#x27;)) - (t(H)+2m(H)) = 1
+\end{aligned}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.500000000000002em;vertical-align:-2.000000000000001em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5000000000000004em;"><span style="top:-4.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.801892em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span><span style="top:-3.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.801892em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span><span style="top:-1.6599999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">Δ</span><span class="mord">Φ</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.000000000000001em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5000000000000004em;"><span style="top:-4.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span></span></span><span style="top:-3.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span></span></span><span style="top:-1.6599999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mopen">(</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.801892em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">2</span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.801892em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mopen">(</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">2</span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.000000000000001em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
+又因为链表本身的插入操作代价为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span> ，于是摊还代价为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo><mo>+</mo><mn>1</mn><mo>=</mo><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1) + 1 = O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>；</li>
+<li>合并操作<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>t</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mi>t</mi><mo stretchy="false">(</mo><mi>H</mi><mn>1</mn><mo stretchy="false">)</mo><mo>+</mo><mi>t</mi><mo stretchy="false">(</mo><mi>H</mi><mn>2</mn><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>m</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mi>m</mi><mo stretchy="false">(</mo><mi>H</mi><mn>1</mn><mo stretchy="false">)</mo><mo>+</mo><mi>m</mi><mo stretchy="false">(</mo><mi>H</mi><mn>2</mn><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi mathvariant="normal">Δ</mi><mi mathvariant="normal">Φ</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mi mathvariant="normal">Φ</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo><mo>−</mo><mo stretchy="false">(</mo><mi mathvariant="normal">Φ</mi><mo stretchy="false">(</mo><mi>H</mi><mn>1</mn><mo stretchy="false">)</mo><mo>+</mo><mi mathvariant="normal">Φ</mi><mo stretchy="false">(</mo><mi>H</mi><mn>2</mn><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo><mo>+</mo><mn>2</mn><mi>m</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>−</mo><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">(</mo><mi>H</mi><mn>1</mn><mo stretchy="false">)</mo><mo>+</mo><mn>2</mn><mi>m</mi><mo stretchy="false">(</mo><mi>H</mi><mn>1</mn><mo stretchy="false">)</mo><mo>+</mo><mi>t</mi><mo stretchy="false">(</mo><mi>H</mi><mn>2</mn><mo stretchy="false">)</mo><mo>+</mo><mn>2</mn><mi>m</mi><mo stretchy="false">(</mo><mi>H</mi><mn>2</mn><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+   t(H) &amp;= t(H1)+t(H2)\\
+         m(H) &amp;= m(H1)+m(H2)\\
+         \Delta\Phi &amp;= \Phi(H) - (\Phi(H1)+\Phi(H2)) = (t(H)+2m(H))-(t(H1)+2m(H1)+t(H2)+2m(H2)) = 0
+\end{aligned}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.500000000000002em;vertical-align:-2.000000000000001em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5000000000000004em;"><span style="top:-4.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span></span></span><span style="top:-3.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span></span></span><span style="top:-1.6599999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">Δ</span><span class="mord">Φ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.000000000000001em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5000000000000004em;"><span style="top:-4.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord">2</span><span class="mclose">)</span></span></span><span style="top:-3.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord">2</span><span class="mclose">)</span></span></span><span style="top:-1.6599999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">Φ</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mopen">(</span><span class="mord">Φ</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">Φ</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord">2</span><span class="mclose">)</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mopen">(</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">2</span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mopen">(</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">2</span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord">2</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">2</span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord">2</span><span class="mclose">)</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.000000000000001em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
+由于链表本身的合并操作代价为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span> ，于是摊还代价为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo><mo>+</mo><mn>0</mn><mo>=</mo><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)+0 = O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span> ；</li>
+<li>提取最小操作<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi mathvariant="normal">Φ</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mi>t</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo><mo>+</mo><mn>2</mn><mi>m</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi mathvariant="normal">Φ</mi><mo stretchy="false">(</mo><msup><mi>H</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>≤</mo><mi>D</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>+</mo><mn>1</mn><mo>+</mo><mn>2</mn><mi>m</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi mathvariant="normal">Δ</mi><mi mathvariant="normal">Φ</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>≤</mo><mi>D</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>−</mo><mi>t</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+   \Phi(H) &amp;= t(H)+2m(H)\\
+         \Phi(H&#x27;) &amp;\le D(n)+1+2m(H)\\
+         \Delta\Phi &amp;\le D(n)-t(H)
+\end{aligned}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.500000000000002em;vertical-align:-2.000000000000001em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5000000000000004em;"><span style="top:-4.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">Φ</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span></span></span><span style="top:-3.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">Φ</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.801892em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span><span style="top:-1.6599999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">Δ</span><span class="mord">Φ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.000000000000001em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5000000000000004em;"><span style="top:-4.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">2</span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span></span></span><span style="top:-3.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">2</span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span></span></span><span style="top:-1.6599999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.000000000000001em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
+因为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">D(n) =  O(lgn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> ，又因为链表本身的抽取操作代价为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>+</mo><mi>t</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(D(n)+t(H))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span> ，所以抽取最小节点的摊还代价为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>+</mo><mi>t</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>−</mo><mi>t</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">)</mo><mo>=</mo><mi>O</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>=</mo><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(D(n)+t(H)) - t(H) = O(D(n)) = O(lgn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 。</li>
+</ol>
+<h2 id="四源码">四、源码</h2>
+<h3 id="fibonaccih">Fibonacci.h</h3>
+<pre><code class="language-c++"><div><span class="hljs-comment">/*
+ * @Description: 算法导论第19章斐波那契堆实现
+ * @Author: rainym00d
+ * @Github: https://github.com/rainym00d
+ * @Date: 2020-11-25 21:54:13
+ * @LastEditors: rainym00d
+ * @LastEditTime: 2020-11-27 14:16:14
+ */</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> once</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;map&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;
+<span class="hljs-title">class</span> <span class="hljs-title">Fibonacci_Heap</span> {</span>
+<span class="hljs-keyword">private</span>:
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>
+    {</span>
+        T key;
+        <span class="hljs-keyword">int</span> degree;
+        <span class="hljs-keyword">bool</span> mark;
+        Node *p, *child, *left, *right;
+        Node(T k) : key(k), degree(<span class="hljs-number">0</span>), mark(<span class="hljs-literal">false</span>) {
+			p = child = <span class="hljs-literal">nullptr</span>;
+			left = right = <span class="hljs-keyword">this</span>;
+		}
+    };
+    
+    Node *Min;
+    <span class="hljs-keyword">int</span> n;
+    <span class="hljs-comment">// vector&lt;Node*&gt; mp;</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Del_Tree</span><span class="hljs-params">(Node *root)</span></span>;
+	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Consolidate</span><span class="hljs-params">()</span></span>;
+	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Link</span><span class="hljs-params">(Node *y, Node *x)</span></span>;
+	<span class="hljs-comment">// void Cut(Node *x, Node *y);</span>
+	<span class="hljs-comment">// void Cascading_Cut(Node *y);</span>
+<span class="hljs-keyword">public</span>:
+    Fibonacci_Heap();
+	~Fibonacci_Heap();
+
+	<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Empty</span><span class="hljs-params">()</span></span>;
+	<span class="hljs-function">T <span class="hljs-title">Top</span><span class="hljs-params">()</span></span>;
+    
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Insert</span><span class="hljs-params">(T x)</span></span>;
+	<span class="hljs-function">T <span class="hljs-title">ExtractMin</span><span class="hljs-params">()</span></span>;
+	<span class="hljs-comment">// void Decrease_Key(T k);</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">HeapUnion</span><span class="hljs-params">(Fibonacci_Heap &lt;T&gt; &amp;A, Fibonacci_Heap &lt;T&gt; &amp;B)</span></span>;
+};
+
+
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;
+<span class="hljs-title">Fibonacci_Heap</span>&lt;T&gt;:</span>:Fibonacci_Heap() {
+    <span class="hljs-keyword">this</span>-&gt;Min = <span class="hljs-literal">nullptr</span>;
+    <span class="hljs-keyword">this</span>-&gt;n = <span class="hljs-number">0</span>;
+}
+
+
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;
+<span class="hljs-title">Fibonacci_Heap</span>&lt;T&gt;:</span>:~Fibonacci_Heap() {
+    <span class="hljs-comment">// this-&gt;mp.clear();</span>
+    Node *ptr = <span class="hljs-keyword">this</span>-&gt;Min;
+    <span class="hljs-keyword">if</span> (ptr == <span class="hljs-literal">nullptr</span>)<span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">do</span> {
+        Del_Tree(ptr);
+        ptr = ptr -&gt; right;
+    } <span class="hljs-keyword">while</span>(ptr != <span class="hljs-keyword">this</span>-&gt;Min);
+}
+
+
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;
+<span class="hljs-title">void</span> <span class="hljs-title">Fibonacci_Heap</span>&lt;T&gt;:</span>:Del_Tree(Node *root) {
+    <span class="hljs-keyword">if</span>(root-&gt;child != <span class="hljs-literal">nullptr</span>) {
+        Node *ptr = root-&gt;child;
+        <span class="hljs-keyword">do</span> {
+            <span class="hljs-keyword">this</span>-&gt;Del_Tree(ptr);
+            ptr = ptr-&gt;right;
+        } <span class="hljs-keyword">while</span>(ptr != root-&gt;child);
+    }
+    <span class="hljs-keyword">delete</span> root;
+}
+
+
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;
+<span class="hljs-title">bool</span> <span class="hljs-title">Fibonacci_Heap</span>&lt;T&gt;:</span>:Empty() {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>-&gt;n == <span class="hljs-number">0</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+}
+
+
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;
+<span class="hljs-title">T</span> <span class="hljs-title">Fibonacci_Heap</span>&lt;T&gt;:</span>:Top() {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>-&gt;Min-&gt;key; 
+}
+
+
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;
+<span class="hljs-title">void</span> <span class="hljs-title">Fibonacci_Heap</span>&lt;T&gt;:</span>:Link(Node *y, Node *x) {
+    <span class="hljs-comment">// 把y从根链表中移除</span>
+    Node* l = y-&gt;left;
+    Node* r = y-&gt;right;
+    l-&gt;right = r;
+    r-&gt;left = l;
+    <span class="hljs-comment">// 把y作为x的子结点，增加x.degree</span>
+    x-&gt;degree ++;
+    y-&gt;p = x;
+    y-&gt;mark = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">if</span> (x-&gt;child != <span class="hljs-literal">nullptr</span>) {
+        Node* t = x-&gt;child-&gt;right;
+        t-&gt;left = y;
+        y-&gt;right = t;
+        y-&gt;left = x-&gt;child;
+        x-&gt;child-&gt;right = y;
+    }
+    <span class="hljs-keyword">else</span> {
+        x-&gt;child = y;
+        y-&gt;left = y;
+        y-&gt;right = y;
+    }
+}
+
+
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;
+<span class="hljs-title">void</span> <span class="hljs-title">Fibonacci_Heap</span>&lt;T&gt;:</span>:Consolidate() {
+    <span class="hljs-built_in">vector</span> &lt;Node*&gt; root_list;
+    <span class="hljs-built_in">vector</span> &lt;Node*&gt; A;
+    Node* cur = <span class="hljs-keyword">this</span>-&gt;Min-&gt;right;
+    root_list.push_back(<span class="hljs-keyword">this</span>-&gt;Min);
+    <span class="hljs-keyword">while</span> (cur != <span class="hljs-keyword">this</span>-&gt;Min) {
+        <span class="hljs-keyword">while</span> (cur-&gt;degree + <span class="hljs-number">1</span> &gt; A.size()) {
+            A.push_back(<span class="hljs-literal">nullptr</span>);
+        }
+        root_list.push_back(cur);
+        cur = cur-&gt;right;
+    }
+    <span class="hljs-comment">// </span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; root_list.size(); i ++) {
+        Node* x = root_list[i];
+        <span class="hljs-keyword">int</span> d = x-&gt;degree;
+        <span class="hljs-keyword">while</span> (d + <span class="hljs-number">10</span> &gt; A.size()) {
+            A.push_back(<span class="hljs-literal">nullptr</span>);
+        }
+        <span class="hljs-keyword">while</span> (A[d] != <span class="hljs-literal">nullptr</span>) {
+            Node* y = A[d];
+            <span class="hljs-keyword">if</span> (x-&gt;key &gt; y-&gt;key) {
+                Node* tmp = x;
+                x = y;
+                y = tmp;
+            }
+            <span class="hljs-keyword">this</span>-&gt;Link(y, x);
+            A[d] = <span class="hljs-literal">nullptr</span>;
+            d ++;
+        }
+        <span class="hljs-keyword">while</span> (d + <span class="hljs-number">5</span> &gt; A.size()) {
+            A.push_back(<span class="hljs-literal">nullptr</span>);
+        }
+        A[d] = x;
+    }
+    <span class="hljs-keyword">this</span>-&gt;Min = <span class="hljs-literal">nullptr</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; A.size(); i ++) {
+        <span class="hljs-keyword">if</span> (A[i] != <span class="hljs-literal">nullptr</span>) {
+            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>-&gt;Min == <span class="hljs-literal">nullptr</span>) {
+                <span class="hljs-keyword">this</span>-&gt;Min = A[i];
+                <span class="hljs-keyword">this</span>-&gt;Min-&gt;left = <span class="hljs-keyword">this</span>-&gt;Min;
+                <span class="hljs-keyword">this</span>-&gt;Min-&gt;right = <span class="hljs-keyword">this</span>-&gt;Min;
+            }
+            <span class="hljs-keyword">else</span> {
+                Node* Min_left = <span class="hljs-keyword">this</span>-&gt;Min;
+                Min_left-&gt;right = A[i];
+                <span class="hljs-keyword">this</span>-&gt;Min-&gt;left = A[i];
+                A[i]-&gt;left = Min_left;
+                A[i]-&gt;right = <span class="hljs-keyword">this</span>-&gt;Min;
+                <span class="hljs-keyword">if</span> (A[i]-&gt;key &lt; <span class="hljs-keyword">this</span>-&gt;Min-&gt;key) {
+                    <span class="hljs-keyword">this</span>-&gt;Min = A[i];
+                }
+            }
+        }
+    }
+}
+
+
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;
+<span class="hljs-title">void</span> <span class="hljs-title">Fibonacci_Heap</span>&lt;T&gt;:</span>:Insert(T x) {
+    <span class="hljs-comment">// while (id &gt;= this-&gt;mp.size()) {</span>
+    <span class="hljs-comment">//     this-&gt;mp.push_back(nullptr);</span>
+    <span class="hljs-comment">// }</span>
+    Node* point = <span class="hljs-keyword">new</span> Node(x);
+    <span class="hljs-comment">// this-&gt;mp[id] = point;</span>
+    
+    <span class="hljs-comment">// 当堆为空时</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>-&gt;Empty()) {
+        <span class="hljs-keyword">this</span>-&gt;Min = point;
+    }
+    <span class="hljs-comment">// 当堆不为空时</span>
+    <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// 把新插入的结点放到Min结点的左边</span>
+        Node* tmp = <span class="hljs-keyword">this</span>-&gt;Min-&gt;left;
+        tmp-&gt;right = point;
+        <span class="hljs-keyword">this</span>-&gt;Min-&gt;left = point;
+        point-&gt;left = tmp;
+        point-&gt;right = <span class="hljs-keyword">this</span>-&gt;Min;
+        <span class="hljs-comment">// 如果新结点的key比较小，那就将Min指向它</span>
+        <span class="hljs-keyword">if</span> (point-&gt;key &lt; <span class="hljs-keyword">this</span>-&gt;Min-&gt;key) {
+            <span class="hljs-keyword">this</span>-&gt;Min = point;
+        }    
+    }
+    <span class="hljs-comment">// 结点数量+1</span>
+    <span class="hljs-keyword">this</span>-&gt;n ++;
+}
+
+
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;
+<span class="hljs-title">T</span> <span class="hljs-title">Fibonacci_Heap</span>&lt;T&gt;:</span>:ExtractMin() {
+    <span class="hljs-comment">// 如果是空</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>-&gt;Empty()) {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    }
+    <span class="hljs-comment">// 如果只有一个</span>
+    <span class="hljs-keyword">this</span>-&gt;n --;
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>-&gt;Empty()) {
+        <span class="hljs-comment">// cout &lt;&lt; &quot;in &quot; &lt;&lt; endl;</span>
+        T ans = <span class="hljs-keyword">this</span>-&gt;Min-&gt;key;
+        <span class="hljs-comment">// cout &lt;&lt; &quot;11 &quot; &lt;&lt; ans &lt;&lt; endl;</span>
+        <span class="hljs-comment">// printf(&quot;%p\n&quot;, &amp;Min);</span>
+        <span class="hljs-keyword">delete</span> <span class="hljs-keyword">this</span>-&gt;Min;
+        <span class="hljs-comment">// cout &lt;&lt; &quot;111&quot; &lt;&lt; endl;</span>
+        <span class="hljs-keyword">this</span>-&gt;Min = <span class="hljs-literal">nullptr</span>;
+        <span class="hljs-keyword">return</span> ans;
+    }
+    <span class="hljs-comment">// 将子结点加入到根链表</span>
+    Node* tmp = <span class="hljs-keyword">this</span>-&gt;Min-&gt;child;
+    <span class="hljs-built_in">vector</span> &lt;Node *&gt; child_list;
+    <span class="hljs-keyword">if</span> (tmp != <span class="hljs-literal">nullptr</span>) {
+        <span class="hljs-keyword">do</span> {
+            child_list.push_back(tmp);
+            tmp = tmp-&gt;right;
+        } <span class="hljs-keyword">while</span> (tmp != <span class="hljs-keyword">this</span>-&gt;Min-&gt;child);
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp;child : child_list) {
+        Node* Min_left = <span class="hljs-keyword">this</span>-&gt;Min-&gt;left;
+        child-&gt;p = <span class="hljs-literal">nullptr</span>;
+        Min_left-&gt;right = child;
+        <span class="hljs-keyword">this</span>-&gt;Min-&gt;left = child;
+        child-&gt;left = Min_left;
+        child-&gt;right = <span class="hljs-keyword">this</span>-&gt;Min;
+    }
+    <span class="hljs-comment">// 将Min从根链表中删除</span>
+    Node* Min_left = <span class="hljs-keyword">this</span>-&gt;Min-&gt;left;
+    Node* Min_right = <span class="hljs-keyword">this</span>-&gt;Min-&gt;right;
+    Min_left-&gt;right = Min_right;
+    Min_right-&gt;left = Min_left;
+    T ans = <span class="hljs-keyword">this</span>-&gt;Min-&gt;key;
+    <span class="hljs-keyword">delete</span> <span class="hljs-keyword">this</span>-&gt;Min;
+    <span class="hljs-keyword">this</span>-&gt;Min = Min_left;
+    <span class="hljs-comment">// printf(&quot;%p %p\n&quot;, &amp;Min, &amp;Min_left);</span>
+    <span class="hljs-comment">// cout &lt;&lt; &quot;left &quot; &lt;&lt; Min_left-&gt;key &lt;&lt; endl;</span>
+    <span class="hljs-keyword">this</span>-&gt;Consolidate();
+    <span class="hljs-keyword">return</span> ans;
+}
+
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;
+<span class="hljs-title">void</span> <span class="hljs-title">Fibonacci_Heap</span>&lt;T&gt;:</span>:HeapUnion(Fibonacci_Heap&lt;T&gt; &amp;A, Fibonacci_Heap&lt;T&gt; &amp;B) {
+    <span class="hljs-comment">// 若两个堆都是空的，则合并后仍是个空堆</span>
+    <span class="hljs-keyword">if</span> (A.Min == <span class="hljs-literal">nullptr</span> &amp;&amp; B.Min == <span class="hljs-literal">nullptr</span>) {
+        <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-comment">// 若只有A是空的，则直接变成B</span>
+    <span class="hljs-keyword">if</span> (A.Min == <span class="hljs-literal">nullptr</span>) {
+        <span class="hljs-keyword">this</span>-&gt;Min = B.Min;
+    }
+    <span class="hljs-comment">// 只有B是空的，则直接变成A</span>
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (B.Min == <span class="hljs-literal">nullptr</span>) {
+        <span class="hljs-keyword">this</span>-&gt;Min = A.Min;
+    }
+    <span class="hljs-comment">// 若都不空</span>
+    <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// 先将Min指向A.Min</span>
+        <span class="hljs-keyword">this</span>-&gt;Min = A.Min;
+        <span class="hljs-comment">// 先将B的结根点全部插入A的跟链表</span>
+        Node* tmp = B.Min;
+        <span class="hljs-built_in">vector</span> &lt;Node*&gt; root_list;
+        <span class="hljs-keyword">do</span> {
+            <span class="hljs-comment">// cout &lt;&lt; &quot;aaa &quot; &lt;&lt; tmp-&gt;key &lt;&lt; endl;</span>
+            root_list.push_back(tmp);
+            tmp = tmp-&gt;right;
+        } <span class="hljs-keyword">while</span> (tmp != B.Min);
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp;root : root_list) {
+            Node* Min_left = <span class="hljs-keyword">this</span>-&gt;Min-&gt;left;
+            Min_left-&gt;right = root;
+            <span class="hljs-keyword">this</span>-&gt;Min-&gt;left = root;
+            root-&gt;left = Min_left;
+            root-&gt;right = <span class="hljs-keyword">this</span>-&gt;Min;
+        }
+        <span class="hljs-comment">// 若B.Min比A.Min的key小，则把Min指向B.Min</span>
+        <span class="hljs-keyword">if</span> (B.Min-&gt;key &lt; A.Min-&gt;key) {
+            <span class="hljs-keyword">this</span>-&gt;Min = B.Min;
+        }   
+    }
+    <span class="hljs-comment">// 更新结点数量</span>
+    <span class="hljs-keyword">this</span>-&gt;n = A.n + B.n;
+}
+</div></code></pre>
+<h3 id="maincpp">main.cpp</h3>
+<pre><code class="language-c++"><div><span class="hljs-comment">/*
+ * @Description: 
+ * @Author: rainym00d
+ * @Github: https://github.com/rainym00d
+ * @Date: 2020-11-27 12:20:03
+ * @LastEditors: rainym00d
+ * @LastEditTime: 2020-11-27 13:52:59
+ */</span>
+
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;Fibonacci.h&quot;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> <span class="hljs-keyword">const</span> *argv[])</span>
+</span>{
+    Fibonacci_Heap &lt;<span class="hljs-keyword">int</span>&gt; A;
+    Fibonacci_Heap &lt;<span class="hljs-keyword">int</span>&gt; B;
+    Fibonacci_Heap &lt;<span class="hljs-keyword">int</span>&gt; H;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i ++) {
+        A.Insert(<span class="hljs-number">2</span> * i);
+        B.Insert(<span class="hljs-number">2</span> * i + <span class="hljs-number">1</span>);
+    }
+    H.HeapUnion(A, B);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">9</span>; i ++) {
+        <span class="hljs-built_in">cout</span> &lt;&lt; H.ExtractMin() &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<h2 id="五运行结果截图">五、运行结果截图</h2>
+<p>操作描述：</p>
+<ol>
+<li>对 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span> 插入了0，2，4，6，8</li>
+<li>对 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span></span> 插入了1，3，5，7</li>
+<li>最后再对他们合并，并执行提取最小操作将其全部输出</li>
+</ol>
+<img src="file:////Users/lsn/Course/大三上/DSA下/作业/作业11/.\20201127-135433.png">
+<h2 id="六问题与总结">六、问题与总结</h2>
+<p>总的来说，本次实验难度较大，原因在于斐波那契堆其本身的数据结构设计就很抽象难以理解。但其有着优越的性质，是非常值得学习的一个数据结构！</p>
+
+    </body>
+    </html>

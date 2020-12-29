@@ -1,0 +1,12 @@
+{
+    "python.pythonPath": "/usr/local/anaconda3/bin/python",
+    "files.associations": {
+        "typeinfo": "cpp",
+        "vector": "cpp",
+        "chrono": "cpp",
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "map": "cpp",
+        "utility": "cpp"
+    }
+}
