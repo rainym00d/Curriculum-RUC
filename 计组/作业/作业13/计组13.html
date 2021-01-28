@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>&#x8BA1;&#x7EC4;13</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="计组13">计组13</h1>
+<center>姓名：邵宁录&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp学号：2018202195</center>
+<h2 id="第一题">第一题</h2>
+<h3 id="程序代码">程序代码</h3>
+<pre><code class="language-x86asm"><div><span class="hljs-symbol">XXX1:</span>   <span class="hljs-number">0100</span>
+    <span class="hljs-keyword">MOV</span> <span class="hljs-built_in">DX</span>, <span class="hljs-number">200</span>
+    <span class="hljs-keyword">MOV</span> <span class="hljs-number">AH</span>, A
+    <span class="hljs-keyword">INT</span> <span class="hljs-number">21</span>
+    <span class="hljs-keyword">MOV</span> <span class="hljs-built_in">SI</span>, <span class="hljs-number">201</span>
+    <span class="hljs-keyword">MOV</span> <span class="hljs-built_in">CL</span>, [<span class="hljs-built_in">SI</span>]
+    <span class="hljs-keyword">MOV</span> <span class="hljs-built_in">AX</span>, <span class="hljs-number">0</span>
+<span class="hljs-symbol">XXX11:</span>    010F
+    <span class="hljs-keyword">INC</span> <span class="hljs-built_in">SI</span>
+    <span class="hljs-keyword">MOV</span> <span class="hljs-built_in">DX</span>, A
+    <span class="hljs-keyword">MUL</span> <span class="hljs-built_in">DX</span>
+    <span class="hljs-keyword">MOV</span> <span class="hljs-built_in">DX</span>, <span class="hljs-number">0</span>
+    <span class="hljs-keyword">MOV</span> <span class="hljs-built_in">DL</span>, [<span class="hljs-built_in">SI</span>]
+    <span class="hljs-keyword">SUB</span> <span class="hljs-built_in">DL</span>, <span class="hljs-number">30</span>
+    <span class="hljs-keyword">ADD</span> <span class="hljs-built_in">AX</span>, <span class="hljs-built_in">DX</span>
+    <span class="hljs-keyword">LOOP</span> XXX1
+    <span class="hljs-keyword">RET</span>
+<span class="hljs-symbol">XXX2:</span>   <span class="hljs-number">0122</span>
+    <span class="hljs-keyword">MOV</span> <span class="hljs-built_in">SI</span>, <span class="hljs-number">220</span>
+    <span class="hljs-keyword">MOV</span> <span class="hljs-built_in">DI</span>, <span class="hljs-number">240</span>
+    <span class="hljs-keyword">MOV</span> <span class="hljs-built_in">DX</span>, <span class="hljs-number">24</span>
+    <span class="hljs-keyword">MOV</span> [<span class="hljs-built_in">DI</span>], <span class="hljs-built_in">DX</span>
+    <span class="hljs-keyword">MOV</span> <span class="hljs-built_in">DX</span>, <span class="hljs-number">0</span>
+    <span class="hljs-keyword">MOV</span> <span class="hljs-built_in">WORD</span> <span class="hljs-built_in">PTR</span> <span class="hljs-built_in">AX</span>, [<span class="hljs-built_in">SI</span>]
+    <span class="hljs-keyword">MOV</span> <span class="hljs-built_in">CX</span>, A
+<span class="hljs-symbol">XXX22:</span>  <span class="hljs-number">0135</span>
+    <span class="hljs-keyword">DEC</span> <span class="hljs-built_in">DI</span>
+    <span class="hljs-keyword">DIV</span> <span class="hljs-built_in">CX</span>
+    <span class="hljs-keyword">ADD</span> <span class="hljs-built_in">DL</span>, <span class="hljs-number">30</span>
+    <span class="hljs-keyword">MOV</span> [<span class="hljs-built_in">DI</span>], <span class="hljs-built_in">DL</span>
+    <span class="hljs-keyword">MOV</span> <span class="hljs-built_in">DX</span>, <span class="hljs-number">0</span>
+    <span class="hljs-keyword">CMP</span> <span class="hljs-built_in">AX</span>, <span class="hljs-number">0</span>
+    <span class="hljs-keyword">JNZ</span> XXX22
+
+    <span class="hljs-keyword">MOV</span> <span class="hljs-built_in">DX</span>, <span class="hljs-built_in">DI</span>
+    <span class="hljs-keyword">MOV</span> <span class="hljs-number">AH</span>, <span class="hljs-number">9</span>
+    <span class="hljs-keyword">INT</span> <span class="hljs-number">21</span>
+    <span class="hljs-keyword">RET</span>
+014C
+<span class="hljs-keyword">MOV</span> <span class="hljs-built_in">SI</span>, <span class="hljs-number">200</span>
+<span class="hljs-keyword">MOV</span> <span class="hljs-built_in">DX</span>, A
+<span class="hljs-keyword">MOV</span> [<span class="hljs-built_in">SI</span>], <span class="hljs-built_in">DX</span>
+<span class="hljs-keyword">CALL</span> XXX1
+<span class="hljs-keyword">PUSH</span> <span class="hljs-built_in">AX</span>
+<span class="hljs-keyword">CALL</span> XXX1
+<span class="hljs-keyword">POP</span> <span class="hljs-built_in">DX</span>
+
+<span class="hljs-keyword">ADD</span> <span class="hljs-built_in">AX</span>, <span class="hljs-built_in">DX</span>
+<span class="hljs-keyword">MOV</span> <span class="hljs-built_in">DI</span>, <span class="hljs-number">220</span>
+<span class="hljs-keyword">MOV</span> [<span class="hljs-built_in">DI</span>], <span class="hljs-built_in">AX</span>
+
+<span class="hljs-keyword">CALL</span> XXX2
+<span class="hljs-keyword">INT</span> <span class="hljs-number">3</span>
+</div></code></pre>
+<h3 id="运行结果">运行结果</h3>
+<p><strong>运行结果</strong>：</p>
+<img src="file:////Users/lsn/Course/大三上/计组/作业/作业13/第一题/运行后.png">
+<h2 id="第二题">第二题</h2>
+<h2 id="程序代码-1">程序代码</h2>
+<pre><code class="language-x86asm"><div><span class="hljs-symbol">input1:</span>
+    <span class="hljs-keyword">mov</span> <span class="hljs-built_in">dx</span>,<span class="hljs-number">200</span>
+    <span class="hljs-keyword">mov</span> <span class="hljs-number">ah</span>,a
+    <span class="hljs-keyword">int</span> <span class="hljs-number">21</span>
+    <span class="hljs-keyword">int</span> <span class="hljs-number">3</span>
+<span class="hljs-symbol">input2:</span>
+    <span class="hljs-keyword">mov</span> <span class="hljs-built_in">dx</span>,<span class="hljs-number">210</span>
+    <span class="hljs-keyword">mov</span> <span class="hljs-number">ah</span>,a
+    <span class="hljs-keyword">int</span> <span class="hljs-number">21</span>
+    <span class="hljs-keyword">int</span> <span class="hljs-number">3</span>
+<span class="hljs-symbol">
+bcdadd:</span>
+    <span class="hljs-keyword">mov</span> <span class="hljs-built_in">si</span>,20B
+    <span class="hljs-keyword">mov</span> <span class="hljs-built_in">di</span>,21B
+    <span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>,<span class="hljs-number">0</span>
+    <span class="hljs-keyword">mov</span> <span class="hljs-built_in">dx</span>,<span class="hljs-number">0</span>
+    <span class="hljs-keyword">mov</span> <span class="hljs-built_in">cx</span>,<span class="hljs-number">10</span>
+    # CF清零
+    <span class="hljs-keyword">add</span> <span class="hljs-built_in">ax</span>,<span class="hljs-number">0</span>
+<span class="hljs-symbol">    xxx:</span>
+        <span class="hljs-keyword">mov</span> <span class="hljs-built_in">al</span>,[<span class="hljs-built_in">si</span>]
+        <span class="hljs-keyword">mov</span> <span class="hljs-built_in">dl</span>,[<span class="hljs-built_in">di</span>]
+        <span class="hljs-keyword">adc</span> <span class="hljs-built_in">al</span>,<span class="hljs-built_in">dl</span>
+        <span class="hljs-keyword">aaa</span>
+        <span class="hljs-keyword">mov</span> [<span class="hljs-built_in">di</span>],<span class="hljs-built_in">al</span>
+        <span class="hljs-keyword">dec</span> <span class="hljs-built_in">si</span>
+        <span class="hljs-keyword">dec</span> <span class="hljs-built_in">di</span>
+        <span class="hljs-keyword">loop</span> xxx
+        <span class="hljs-keyword">int</span> <span class="hljs-number">3</span>
+<span class="hljs-symbol">
+bcdToasc:</span>
+    <span class="hljs-keyword">mov</span> <span class="hljs-built_in">si</span>,21B
+    <span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>,<span class="hljs-number">0</span>
+    <span class="hljs-keyword">mov</span> <span class="hljs-built_in">dx</span>,<span class="hljs-number">0</span>
+    <span class="hljs-keyword">mov</span> <span class="hljs-built_in">cx</span>,<span class="hljs-number">10</span>
+    <span class="hljs-keyword">add</span> <span class="hljs-built_in">ax</span>,<span class="hljs-number">0</span>
+<span class="hljs-symbol">    xxx:</span>
+        <span class="hljs-keyword">mov</span> <span class="hljs-built_in">al</span>,[<span class="hljs-built_in">si</span>]
+        <span class="hljs-keyword">add</span> <span class="hljs-built_in">al</span>,<span class="hljs-number">30</span>
+        <span class="hljs-keyword">dec</span> <span class="hljs-built_in">si</span>
+        <span class="hljs-keyword">loop</span> xxx
+    # 添加结束字符
+    <span class="hljs-keyword">mov</span> <span class="hljs-built_in">al</span>,<span class="hljs-number">24</span>
+    <span class="hljs-keyword">mov</span> [21C],<span class="hljs-built_in">al</span>
+    <span class="hljs-keyword">int</span> <span class="hljs-number">3</span>
+<span class="hljs-symbol">
+output:</span>
+    <span class="hljs-keyword">mov</span> <span class="hljs-built_in">dx</span>,<span class="hljs-number">212</span>
+    <span class="hljs-keyword">mov</span> <span class="hljs-number">ah</span>,<span class="hljs-number">9</span>
+    <span class="hljs-keyword">int</span> <span class="hljs-number">21</span>
+    <span class="hljs-keyword">int</span> <span class="hljs-number">3</span>
+
+<span class="hljs-keyword">call</span> input1
+<span class="hljs-keyword">call</span> input2
+<span class="hljs-keyword">call</span> bcdadd
+<span class="hljs-keyword">call</span> bcdToasc
+<span class="hljs-keyword">call</span> output
+</div></code></pre>
+
+    </body>
+    </html>
